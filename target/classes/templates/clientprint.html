@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Clients to print</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="/css/client-print-page.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:600">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Marcellus">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body class="main">
+    <script>
+        jQuery(document).ready(function($) {
+            loadAllObjectsToPage(); // loading all objects from database to page
+        });
+
+        function loadAllObjectsToPage() {
+            $.ajax({
+                url: '/client/all/print',
+                type: 'post',
+                success: function (data) {
+                    $("#body-content").html(data);
+                },
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                }
+            });
+        }
+    </script>
+
+    <header class="header">
+        <a class="logo-block" href="/client">
+            <img src="/images/main.png" alt="Logo image">
+            <span>Mira</span>
+        </a>
+        <span>Clients</span>
+        <a onclick="window.print()" class="print-button">
+            <img src="/images/share.png" class="left-menu-image">
+            <span>PRINT LIST OF ALL CLIENTS</span>
+        </a>
+    </header>
+    <div id="body-content">
+
+    </div>
+    <footer class="footer">
+        <div class="footer-block">
+            <a class="logo-block" href="/client">
+                <img src="/images/main.png" alt="Logo image">
+                <span>Mira</span>
+            </a>
+        </div>
+        <div class="footer-block tsi-info">
+            <span>Ilya Pozdeev's coursework for the TTI university</span>
+        </div>
+    </footer>
+</body>
+</html>
